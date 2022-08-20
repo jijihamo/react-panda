@@ -46,7 +46,7 @@ function Login() {
             <input type="email" value={Email} required onChange={(e)=>setEmail(e.currentTarget.value)}/>
             <label>비밀번호</label>
             <input type="password" value={PW} required onChange={(e)=>setPW(e.currentTarget.value)}/>
-            {ErrorMsg != "" && <p>{ErrorMsg}</p>}
+            {ErrorMsg !== "" && <p>{ErrorMsg}</p>}
             <button onClick={(e)=>SignInFunc(e)}>로그인</button>
             <button onClick={(e)=> {
                 e.preventDefault();

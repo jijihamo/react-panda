@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { LoginDiv } from '../../Style/UserCSS';
 
 import firebase from '../../firebase';
-import { async } from '@firebase/util';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,7 +23,7 @@ function Register() {
     if (!(Name && Email && PW && PWConfirm )) {
       return alert("모든 값을 채워주세요.");
     }
-    if (PW != PWConfirm) {
+    if (PW !== PWConfirm) {
       return alert("비밀번호와 비밀번호 확인 값은 같아야 합니다.");
     }
     if (!NameCheck) {

@@ -1,32 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 import { ListDiv, ListItem } from "../../Style/ListCSS";
-import axios from "axios";
 import Avatar from "react-avatar";
+
+import moment from "moment";
+import "moment/locale/ko";
 
 function List(props) {
 
-  const [postList, setPostList] = useState([]);
+  const setTime = (a, b) => {
+    if (a !== b) {
+      return moment(b).format('YYYY년 MMMM Do, a hh:mm');
+    } else {
+      return moment(a).format('YYYY년 MMMM Do, a hh:mm');
+    }
+  }
 
-
-  useEffect(()=> {
-    axios
-      .post("/api/post/list")
-      .then((response) => {
-        if (response.data.success) {
-          setPostList([...response.data.postList]);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  return (
+ return (
     <>
     <ListDiv>
       <h3>List!</h3>
-      {postList.map((post, idx) => {
+      {props.PostList && props.PostList.map((post, idx) => {
         return (
           <ListItem key={idx}>
             <Link to={`/post/${post.postNum}`}>
@@ -39,6 +33,7 @@ function List(props) {
               />
               <p className="auth">{post.author.displayName}</p>
               <p>{post.content}</p>
+              <p>{setTime(post.createdAt, post.updatedAt)}</p>
             </Link>
           </ListItem>
         );
